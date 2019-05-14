@@ -10,11 +10,20 @@ public class Fib {
     /** 
       @return the nth Fibonacci number
               by implementing the recurrence relation
+		I made this a class method because I would prefer to simply
+		call upon this method without having to change an instance of the class.
      */
-    public ?? long fib_recurrence( int n) {
-        return -2; // invalid Fibonacci number
+    public static long fib_recurrence( int n) {
+        if (n == 0) // decision to solve base case or recursive cases
+			return 0; // solution for base case
+		//recursive cases
+		else if (n == 1) // leftover processsing
+			return 1;
+		else return fib_recurrence(n-1) //recursive abstraction
+					+ fib_recurrence (n - 2); //concatenation and recursive abstraction
     }
-     /* These are class / instance methods because...
+     /* These are class methods because the method
+	    does not use instance variables
     */
 
 
@@ -22,18 +31,26 @@ public class Fib {
       @return the nth Fibonacci number
               calculated via the 8th-grade algorithm
      */
-    public ?? long fib_grade8( int n) {
-        return -2; // invalid Fibonacci number
+    public static long fib_grade8( int n) {
+        int numFirst = 0;
+		int numSecond = 1;
+		int numSecondCopy = numSecond;
+		for (int i = 0; i < n; i++){
+			numSecondCopy = numSecond;
+			numSecond = numFirst + numSecond;
+			numFirst = numSecondCopy;
+		}
+		return numFirst;
     }
     /* Time complexity:
        Consider the size of the problem to be ...
-       
+       n
        As the proxy for the time required, count...
-       
+       the iterations of the for loop
        Then cost of the the recurrence algorithm
-       grows ?? 
+       grows linearly because
        as the size of the problem increases,
-       because ??
+	   for iterates n times
      */
 
 
@@ -43,17 +60,19 @@ public class Fib {
               Type is double so that this exercise can
               ignore rounding issues.
      */
-    public ?? double fib_Binet( int n) {
-        return -2; // invalid Fibonacci number
+    public static double fib_Binet( int n) {
+		double oVariable = (1 + Math.sqrt(5))/2;
+		double vVariable = (1 - Math.sqrt(5))/2;
+		return (Math.pow(oVariable, n) - Math.pow(vVariable, n))/ Math.sqrt(5);
     }
     /* Time complexity:
        Consider the size of the problem to be ...
-       
+       n
        As the proxy for the time required, count...
-       
+       the amount of arithmetic operations
        Then cost of the the recurrence algorithm
-       grows ?? 
+       does not grow
        as the size of the problem increases,
-       because ??
+       the procedure remains constant.
      */
 }
